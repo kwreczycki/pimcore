@@ -53,10 +53,10 @@ class Service
      * @param $class
      * @param $json
      * @param bool $throwException
-     *
+     * @param bool $saveDefinitionFile
      * @return bool
      */
-    public static function importClassDefinitionFromJson($class, $json, $throwException = false)
+    public static function importClassDefinitionFromJson($class, $json, $throwException = false, $saveDefinitionFile = true)
     {
         $userId = 0;
         $user = \Pimcore\Tool\Admin::getCurrentUser();
@@ -89,7 +89,7 @@ class Service
         $class->setPropertyVisibility($importData['propertyVisibility']);
         $class->setLinkGeneratorReference(isset($importData['linkGeneratorReference']) ? $importData['linkGeneratorReference'] : null);
 
-        $class->save();
+        $class->save($saveDefinitionFile);
 
         return true;
     }
